@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/Outfit_Complete/Fonts/TTF/Outfit-Variable.ttf")
+    format("truetype");
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  font-weight: 400;
+  font-size: 1em;
+  color: var(--color-primary);
+}
+
+p,
+a,
+span,
+ul,
+ol,
+input,
+label,
+button,
+tr {
+  font-family: "Outfit";
+  font-variation-settings: "wght" 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.t1,
+.t2,
+.t3,
+.t4,
+.t5,
+.t6 {
+  font-family: "Outfit";
+  font-variation-settings: "wght" 600;
+
+  a,
+  span {
+    font-family: "Outfit";
+    font-variation-settings: "wght" 600;
+  }
+}
+
+.t1 {
+  @apply text-5xl;
+}
+
+.t2 {
+  @apply text-4xl;
+}
+
+.t3 {
+  @apply text-3xl;
+}
+
+.t4 {
+  @apply text-2xl;
+}
+
+.t5 {
+  @apply text-xl;
+}
+
+.t6 {
+  @apply text-lg;
+}
+
+.t7 {
+  @apply text-base;
+}
+
+.t8 {
+  @apply text-sm;
+}

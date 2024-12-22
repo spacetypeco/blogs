@@ -1,0 +1,10 @@
+.maxWidth {
+  max-width: max(95%, 1600px);
+}
+
+@media (max-width: 768px) {
+  .maxWidth {
+    max-width: reset;
+    min-width: 100%;
+  }
+}
