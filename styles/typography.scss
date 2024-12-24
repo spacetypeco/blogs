@@ -1,3 +1,21 @@
+// Felicette Typeface
+@each $style in ("Bold", "Extrabold", "Light", "Medium", "Regular", "Thin") {
+  @font-face {
+    font-family: "ST Felicette #{$style}";
+    src: url("https://fonts-priv.vercel.app/rj03j0fg2gh32gh20r012rj10fg/Felicettev0.2-#{$style}.otf");
+  }
+}
+
+// Monochromic Typeface
+@each $style
+  in ("Bold", "SemiBold", "Medium", "Regular", "Thin", "ExtraLight", "Light")
+{
+  @font-face {
+    font-family: "ST Monochromic #{$style}";
+    src: url("https://fonts-priv.vercel.app/iaohe8rq2rh2981rt901thf8g032038gh/STMonochromicv.01-#{$style}.otf");
+  }
+}
+
 @font-face {
   font-family: "Outfit";
   src: url("/fonts/Outfit_Complete/Fonts/TTF/Outfit-Variable.ttf")
@@ -21,8 +39,10 @@ ol,
 input,
 label,
 button,
-tr {
-  font-family: "Outfit";
+tr,
+.notion-text,
+figcaption {
+  font-family: "ST Felicette Regular";
   font-variation-settings: "wght" 400;
 }
 
@@ -37,14 +57,14 @@ h6,
 .t3,
 .t4,
 .t5,
-.t6 {
-  font-family: "Outfit";
-  font-variation-settings: "wght" 600;
+.t6,
+.t7,
+.t8 {
+  font-family: "ST Felicette Medium";
 
   a,
   span {
-    font-family: "Outfit";
-    font-variation-settings: "wght" 600;
+    font-family: "ST Felicette Medium";
   }
 }
 

@@ -3,15 +3,22 @@
  *
  * We can add shared stylesheets and set the charset here.
  */
+// core styles shared by all of react-notion-x (required)
+import "react-notion-x/src/styles.css";
+// used for code syntax highlighting (optional)
+// import "prismjs/themes/prism-tomorrow.css";
+// used for rendering equations (optional)
+// import "katex/dist/katex.min.css";
 import "../styles/base.scss";
 import "../styles/themes.scss";
 import "../styles/typography.scss";
 import "../styles/layout.scss";
 import "../styles/logo.scss";
+import "../styles/notion-x.scss";
 
+import Content from "../content";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
-import Content from "../content";
 
 export default function Layout({ children }) {
   // Update this with your custom Google Analytics ID

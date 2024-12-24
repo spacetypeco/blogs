@@ -1,13 +1,10 @@
 "use client";
 
 import { Rotate as Hamburger } from "hamburger-react";
-
 import Link from "next/link";
+import useHideOnScroll from "../hooks/useHideOnScroll";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-import useHideOnScroll from "../hooks/useHideOnScroll";
-import LogoWhite from "../public/img/logo_white.svg";
 
 export default function Navigation() {
   let visible = useHideOnScroll();
@@ -38,14 +35,14 @@ export default function Navigation() {
 
   const NavVersion = (classNames, style) => {
     let classes =
-      "flex flex-col sm:flex-row justify-between w-full fixed px-12 py-8 " +
+      "container flex flex-col sm:flex-row justify-between w-full fixed px-12 py-8 " +
       classNames;
 
     return (
       <div className={classes} style={style}>
         <div className="logo overflow-y-hidden">
           <Link href="/" onClick={() => setOpen(false)}>
-            <LogoWhite />
+            Home
           </Link>
         </div>
         <div>
@@ -54,7 +51,7 @@ export default function Navigation() {
               id="nav-box"
               className="flex flex-col md:flex-row items-center justify-center h-full gap-8"
             >
-              {NavLink("Fonts", "/fonts")}
+              {NavLink("Home", "/")}
               {NavLink("About", "/about")}
             </div>
           </div>
@@ -66,7 +63,7 @@ export default function Navigation() {
   return (
     <>
       <div
-        className="md:hidden fixed flex flex-row justify-end w-full p-8"
+        className="container md:hidden fixed flex flex-row justify-end p-8"
         style={{
           zIndex: 3,
         }}
