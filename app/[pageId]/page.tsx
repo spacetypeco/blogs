@@ -5,6 +5,7 @@ import { getSiteMap } from "../../lib/notion_client/getSiteMap";
 import NotionClient from "../../lib/notion_client/NotionClient";
 import siteConfig from "../../site.config";
 
+export const dynamic = "auto";
 export const revalidate = siteConfig.revalidate;
 
 async function Home({ params }) {
