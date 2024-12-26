@@ -4,6 +4,7 @@ export interface SiteConfig {
 
   name: string;
   description: string;
+  icon: string;
   domain: string;
   author: string;
   language?: string;
