@@ -6,8 +6,9 @@ import Link from "next/link";
 import { getCanonicalPageId } from "../lib/notion_client/getCanonicalPageId";
 import { getSiteConfig } from "../lib/notion_client/getSiteMap";
 import NotionClient from "../lib/notion_client/NotionClient";
+import siteConfig from "../site.config";
 
-export const revalidate = 60;
+export const revalidate = siteConfig.revalidate;
 
 async function Home() {
   const rootNotionPageId: string = parsePageId(
@@ -41,7 +42,7 @@ async function Home() {
       {pages.map((page) => {
         return (
           <div className="flex flex-col gap-1">
-            <Link href={page.path} className="color-scarlet-hover t6">
+            <Link href={page.path} className="color-accent-hover t6">
               {page.title}
             </Link>
             <span className="text-base">

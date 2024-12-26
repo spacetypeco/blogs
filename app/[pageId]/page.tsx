@@ -1,8 +1,9 @@
 import NotionPage from "../../components/NotionPage";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
 import NotionClient from "../../lib/notion_client/NotionClient";
+import siteConfig from "../../site.config";
 
-export const revalidate = 60;
+export const revalidate = siteConfig.revalidate;
 
 async function Home({ params }) {
   const siteMap = await getSiteMap();

@@ -33,9 +33,9 @@ export const getCanonicalPageUrl =
     );
     const domain = getSiteConfig("domain");
     if (uuidToId(pageId) === rootNotionPageId) {
-      return `https://${domain}`;
+      return `${domain}`;
     } else {
-      return `https://${domain}/${getCanonicalPageId(pageUuid, recordMap, {
+      return `${domain}/${getCanonicalPageId(pageUuid, recordMap, {
         uuid: false,
       })}`;
     }

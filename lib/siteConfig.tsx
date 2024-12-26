@@ -7,6 +7,10 @@ export interface SiteConfig {
   author: string;
   description?: string;
   language?: string;
+  revalidate: number;
+
+  colorAccent?: string;
+  colorBackground?: string;
 }
 
 export interface NavigationLink {

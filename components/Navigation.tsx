@@ -1,12 +1,11 @@
 "use client";
 
-import { Rotate as Hamburger } from "hamburger-react";
-
 import Link from "next/link";
-import { useState } from "react";
+
+import siteConfig from "../site.config";
 
 export default function Navigation() {
-  const els = "Lynne's Blug".split("").map((c, idx) => {
+  const els = siteConfig.name.split("").map((c, idx) => {
     return (
       <div
         className="p-1 rounded-full"
@@ -20,7 +19,7 @@ export default function Navigation() {
   });
 
   return (
-    <Link href="/" className="color-scarlet-hover">
+    <Link href="/" className="color-accent-hover">
       <nav className="container w-full flex pt-12 t5">{els}</nav>
     </Link>
   );

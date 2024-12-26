@@ -1,9 +1,4 @@
-import {
-  getAllPagesInSpace,
-  getPageProperty,
-  parsePageId,
-  uuidToId,
-} from "notion-utils";
+import { getAllPagesInSpace, getPageProperty, parsePageId } from "notion-utils";
 import pMemoize from "p-memoize";
 
 import siteConfig from "../../site.config";

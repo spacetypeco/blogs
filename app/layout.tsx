@@ -19,6 +19,7 @@ import "../styles/notion-x.scss";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import Content from "../content";
+import siteConfig from "../site.config";
 
 export default function Layout({ children }) {
   // Update this with your custom Google Analytics ID
@@ -93,7 +94,9 @@ export default function Layout({ children }) {
       </head>
       <body
         style={{
-          backgroundColor: "var(--color-secondary)",
+          ["--color-accent" as string]: siteConfig.colorAccent,
+          ["--color-background" as string]: siteConfig.colorBackground,
+          backgroundColor: "var(--color-background)",
           transition: "background-color 0.25s",
         }}
       >
