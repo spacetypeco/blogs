@@ -104,7 +104,6 @@ export default function Layout({ children }) {
         <main className="flex flex-col justify-start min-h-screen">
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );
