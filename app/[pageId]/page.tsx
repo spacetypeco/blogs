@@ -19,6 +19,7 @@ async function Home({ params }) {
       </section>
     );
   } catch (e) {
+    console.error(e);
     notFound();
   }
 }
