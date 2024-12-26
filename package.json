@@ -11,22 +11,15 @@
   },
   "dependencies": {
     "chroma-js": "^3.1.2",
-    "contentful": "^10.6.7",
-    "contentful-management": "^11.5.1",
     "dayjs": "^1.11.13",
     "feed": "^4.2.2",
-    "hamburger-react": "^2.5.1",
     "lodash.merge": "^4.6.2",
     "next": "^14.2.21",
     "notion-client": "^7.1.5",
     "p-memoize": "^7.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-mailchimp-subscribe": "^2.1.3",
-    "react-notion-x": "^7.2.5",
-    "react-p5-wrapper": "^3.3.0",
-    "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "react-notion-x": "^7.2.5"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
