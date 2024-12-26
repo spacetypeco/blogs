@@ -5,6 +5,7 @@ import Link from "next/link";
 import siteConfig from "../site.config";
 
 export default function Navigation() {
+  console.log(siteConfig);
   const els = siteConfig.name.split("").map((c, idx) => {
     return (
       <div

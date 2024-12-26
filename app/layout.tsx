@@ -46,11 +46,11 @@ export default function Layout({ children }) {
       <head>
         {GoogleAnalytics}
         <meta charSet="utf-8" />
-        <title>{Content.siteName}</title>
-        <meta name="description" content={Content.siteDescription} />
-        <meta property="og:title" content={Content.siteName} />
-        <meta property="og:description" content={Content.siteDescription} />
-        <meta property="og:url" content={Content.siteUrl} />
+        <title>{siteConfig.name}</title>
+        <meta name="description" content={siteConfig.description} />
+        <meta property="og:title" content={siteConfig.name} />
+        <meta property="og:description" content={siteConfig.description} />
+        <meta property="og:url" content={siteConfig.domain} />
         <meta property="og:type" content="website" />
         {/* <meta
           property="og:image"

@@ -38,7 +38,7 @@ async function Home() {
   }
 
   return (
-    <section className="container w-full flex flex-col pt-12 gap-4">
+    <section className="container w-full flex flex-col pt-12 gap-6 items-start">
       {pages.map((page) => {
         return (
           <div className="flex flex-col gap-1">
