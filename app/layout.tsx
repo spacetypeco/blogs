@@ -16,9 +16,7 @@ import "../styles/layout.scss";
 import "../styles/logo.scss";
 import "../styles/notion-x.scss";
 
-import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
-import Content from "../content";
 import siteConfig from "../site.config";
 
 export default function Layout({ children }) {
@@ -67,6 +65,10 @@ export default function Layout({ children }) {
         <meta property="twitter:image:alt" content="Space Type logo" /> */}
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="icon"
+          href={`data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${siteConfig.icon}</text></svg>`}
+        />
 
         {/* Generate favicons from https://realfavicongenerator.net/ */}
         {/* <meta charSet="utf-8" />
@@ -96,6 +98,13 @@ export default function Layout({ children }) {
         style={{
           ["--color-accent" as string]: siteConfig.colorAccent,
           ["--color-background" as string]: siteConfig.colorBackground,
+          ["--color-primary" as string]: siteConfig.colorPrimary,
+          ["--color-body" as string]: siteConfig.colorBody,
+          ["--color-caption" as string]: siteConfig.colorCaption,
+          ["--font-headings-large" as string]: siteConfig.fontHeadingsLarge,
+          ["--font-headings-small" as string]: siteConfig.fontHeadingsSmall,
+          ["--font-body" as string]: siteConfig.fontBody,
+          color: "var(--color-primary)",
           backgroundColor: "var(--color-background)",
           transition: "background-color 0.25s",
         }}

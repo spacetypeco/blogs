@@ -6,12 +6,17 @@ export interface SiteConfig {
   description: string;
   domain: string;
   author: string;
-  description?: string;
   language?: string;
   revalidate: number;
 
   colorAccent?: string;
   colorBackground?: string;
+  colorPrimary?: string;
+  colorBody?: string;
+  colorCaption?: string;
+  fontHeadingsLarge?: string;
+  fontHeadingsSmall?: string;
+  fontBody?: string;
 }
 
 export interface NavigationLink {

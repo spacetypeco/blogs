@@ -20,6 +20,9 @@
   font-weight: 400;
   font-size: 1em;
   color: var(--color-primary);
+  --font-headings-large: "ST Felicette Medium";
+  --font-heading-small: "ST Felicette Regular";
+  --font-body: "ST Felicette Regular";
 }
 
 p,
@@ -32,8 +35,9 @@ label,
 button,
 tr,
 .notion-text,
-figcaption {
-  font-family: "ST Felicette Regular";
+figcaption,
+blockquote {
+  font-family: var(--font-body);
 }
 
 h1,
@@ -47,22 +51,22 @@ h6,
 .t3,
 .t4,
 .t5 {
-  font-family: "ST Felicette Medium";
+  font-family: var(--font-headings-large);
 
   a,
   span {
-    font-family: "ST Felicette Medium";
+    font-family: var(--font-headings-large);
   }
 }
 
 .t6,
 .t7,
 .t8 {
-  font-family: "ST Felicette Regular";
+  font-family: var(--font-headings-small);
 
   a,
   span {
-    font-family: "ST Felicette Regular";
+    font-family: var(--font-headings-small);
   }
 }
 

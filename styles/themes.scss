@@ -26,6 +26,8 @@
   // Configurable theme variables
   --color-accent: var(--color-scarlet);
   --color-background: var(--color-secondary);
+  --color-body: var(--color-primary);
+  --color-caption: rgba(55, 53, 47, 0.6);
 }
 
 @each $color

@@ -2,6 +2,11 @@
   display: none;
 }
 
+.notion-title,
+.notion-h {
+  color: var(--color-primary);
+}
+
 :root {
   --notion-max-width: 800px;
 }
@@ -20,4 +25,18 @@
 
 .notion-app {
   background: none;
+}
+
+.notion-text {
+  color: var(--color-body);
+}
+
+.notion-callout-text > .notion-text,
+blockquote {
+  color: var(--color-body);
+}
+
+.notion-asset-caption {
+  color: var(--color-caption);
+  opacity: 0.7;
 }
