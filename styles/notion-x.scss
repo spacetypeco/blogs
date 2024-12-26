@@ -1,3 +1,23 @@
 .notion-header {
   display: none;
 }
+
+:root {
+  --notion-max-width: 800px;
+}
+
+.notion-link {
+  color: var(--color-scarlet);
+  border-color: var(--color-scarlet);
+}
+
+.notion-callout {
+  border-radius: 5px;
+  border: none;
+  margin-block: 1rem;
+  padding-top: 20px;
+}
+
+.notion-app {
+  background: none;
+}

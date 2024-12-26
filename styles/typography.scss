@@ -16,15 +16,6 @@
   }
 }
 
-@font-face {
-  font-family: "Outfit";
-  src: url("/fonts/Outfit_Complete/Fonts/TTF/Outfit-Variable.ttf")
-    format("truetype");
-  font-weight: 300;
-  font-display: swap;
-  font-style: normal;
-}
-
 :root {
   font-weight: 400;
   font-size: 1em;
@@ -43,7 +34,6 @@ tr,
 .notion-text,
 figcaption {
   font-family: "ST Felicette Regular";
-  font-variation-settings: "wght" 400;
 }
 
 h1,
@@ -56,15 +46,23 @@ h6,
 .t2,
 .t3,
 .t4,
-.t5,
-.t6,
-.t7,
-.t8 {
+.t5 {
   font-family: "ST Felicette Medium";
 
   a,
   span {
     font-family: "ST Felicette Medium";
+  }
+}
+
+.t6,
+.t7,
+.t8 {
+  font-family: "ST Felicette Regular";
+
+  a,
+  span {
+    font-family: "ST Felicette Regular";
   }
 }
 

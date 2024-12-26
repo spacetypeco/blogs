@@ -1,10 +1,11 @@
+import dayjs from "dayjs";
 import { getDateValue, parsePageId } from "notion-utils";
 
 import Link from "next/link";
-import NotionClient from "../lib/notion_client/NotionClient";
-import dayjs from "dayjs";
+
 import { getCanonicalPageId } from "../lib/notion_client/getCanonicalPageId";
 import { getSiteConfig } from "../lib/notion_client/getSiteMap";
+import NotionClient from "../lib/notion_client/NotionClient";
 
 export const revalidate = 60;
 
@@ -13,18 +14,12 @@ async function Home() {
     getSiteConfig("rootNotionPageId"),
     { uuid: false },
   );
-  console.log("HOME");
 
   const dbRecords = await NotionClient.getPage(rootNotionPageId);
   const pages = Object.values(dbRecords.block)
     .filter((b) => b.value.type == "page")
     .filter((b) => b.value.properties.JgHm)
     .map((b) => {
-      console.log({
-        title: b.value.properties.title[0][0],
-        rest: b.value.properties,
-        publishedDate: getDateValue(b.value.properties.JgHm),
-      });
       return {
         id: b.value.id,
         title: b.value.properties.title[0][0],
@@ -42,12 +37,17 @@ async function Home() {
   }
 
   return (
-    <section className="nav-spacer container w-full flex flex-col">
+    <section className="container w-full flex flex-col pt-12 gap-4">
       {pages.map((page) => {
         return (
-          <Link href={page.path}>
-            {page.title} - {page.publishedDate.format("MMM DD, YYYY")}
-          </Link>
+          <div className="flex flex-col gap-1">
+            <Link href={page.path} className="color-scarlet-hover t6">
+              {page.title}
+            </Link>
+            <span className="text-base">
+              {page.publishedDate.format("MMM DD, YYYY")}
+            </span>
+          </div>
         );
       })}
     </section>

@@ -16,9 +16,9 @@ import "../styles/layout.scss";
 import "../styles/logo.scss";
 import "../styles/notion-x.scss";
 
-import Content from "../content";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
+import Content from "../content";
 
 export default function Layout({ children }) {
   // Update this with your custom Google Analytics ID
@@ -91,15 +91,14 @@ export default function Layout({ children }) {
         <meta name="msapplication-TileColor" content="#DA532C" />
         <meta name="theme-color" content="#FFFFFF" /> */}
       </head>
-      <body>
+      <body
+        style={{
+          backgroundColor: "var(--color-secondary)",
+          transition: "background-color 0.25s",
+        }}
+      >
         <Navigation />
-        <main
-          className="flex flex-col justify-start min-h-screen"
-          style={{
-            backgroundColor: "var(--color-secondary)",
-            transition: "background-color 0.25s",
-          }}
-        >
+        <main className="flex flex-col justify-start min-h-screen">
           {children}
         </main>
         <Footer />

@@ -1,16 +1,15 @@
-import type * as types from "./types";
-
 import {
   getAllPagesInSpace,
   getPageProperty,
   parsePageId,
   uuidToId,
 } from "notion-utils";
-
-import NotionClient from "./NotionClient";
-import { getCanonicalPageId } from "./getCanonicalPageId";
 import pMemoize from "p-memoize";
+
 import siteConfig from "../../site.config";
+import { getCanonicalPageId } from "./getCanonicalPageId";
+import NotionClient from "./NotionClient";
+import type * as types from "./types";
 
 export function getSiteConfig<T>(key: string, defaultValue?: T): T {
   const value = siteConfig[key];
@@ -51,7 +50,6 @@ const getAllPages = pMemoize(getAllPagesImpl, {
 });
 
 const getPage = async (pageId: string, ...args) => {
-  console.log("\nnotion getPage", uuidToId(pageId));
   return NotionClient.getPage(pageId, args);
 };
 
