@@ -60,6 +60,10 @@ blockquote {
   }
 }
 
+.notion-quote {
+  font-size: unset;
+}
+
 // Adjust spacing in blog posts
 .notion-h + .notion-text {
   margin-top: 0.4rem;
