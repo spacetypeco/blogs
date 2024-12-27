@@ -9,6 +9,12 @@
   padding-right: calc(min(0.25rem, 8vw));
 }
 
+// Unset font-weight cuz why
+.notion-title,
+.notion-h {
+  font-weight: unset;
+}
+
 // Hide the navigational breadcrumbs, we don't need 'em.
 .notion-header {
   display: none;
