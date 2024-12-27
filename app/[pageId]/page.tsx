@@ -20,9 +20,9 @@ async function Home({ params }) {
   try {
     const recordMap = await NotionClient.getPage(notionId);
     const block = getFirstBlock(recordMap);
-    const publishedDate = dayjs(
-      getDateValue(block.properties["JgHm"]).start_date,
-    );
+    const publishedDate = block.properties["JgHm"]
+      ? dayjs(getDateValue(block.properties["JgHm"]).start_date)
+      : null;
 
     return (
       <section className="container w-full flex flex-col">
@@ -34,7 +34,7 @@ async function Home({ params }) {
               transform: "rotate(3deg) translateY(-2px)",
             }}
           >
-            {publishedDate.format("MMM DD, YYYY")}
+            {publishedDate?.format("MMM DD, YYYY") || "unpublished"}
           </p>
         </div>
         <NotionPage recordMap={recordMap} />

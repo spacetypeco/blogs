@@ -7,10 +7,10 @@ import { getCanonicalPageUrl } from "../../lib/notion_client/mapPageUrl";
 import siteConfig from "../../site.config";
 import { getFirstBlock, isBlogPost } from "../../util/notion";
 
+export const revalidate = siteConfig.revalidate;
+
 export async function GET(req) {
   const siteMap = await getSiteMap();
-  const ttlMinutes = 24 * 60; // 24 hours
-  const ttlSeconds = ttlMinutes * 60;
   const author = { name: siteConfig.author };
   const params = req.nextUrl.searchParams;
   const feedType = params.get("type");

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { getDateValue, parsePageId } from "notion-utils";
+import { getDateValue, getPageProperty, parsePageId } from "notion-utils";
 
 import Link from "next/link";
 
@@ -19,7 +19,11 @@ async function Home() {
   const dbRecords = await NotionClient.getPage(rootNotionPageId);
   const pages = Object.values(dbRecords.block)
     .filter((b) => b.value.type == "page")
-    .filter((b) => b.value.properties.JgHm)
+    .filter(
+      (b) =>
+        siteConfig.showUnpublished ||
+        getPageProperty<boolean | null>("Published Date", b.value, dbRecords),
+    )
     .map((b) => {
       return {
         id: b.value.id,
@@ -28,10 +32,22 @@ async function Home() {
           `/${getCanonicalPageId(b.value.id, dbRecords, { uuid: false })}`,
           new URLSearchParams(),
         ),
-        publishedDate: dayjs(getDateValue(b.value.properties.JgHm).start_date),
+        publishedDate: b.value.properties.JgHm
+          ? dayjs(getDateValue(b.value.properties.JgHm).start_date)
+          : null,
       };
     })
-    .toSorted((a, b) => b.publishedDate.diff(a.publishedDate));
+    .toSorted((a, b) => {
+      if (a.publishedDate == null && b.publishedDate == null) {
+        return 0;
+      } else if (b.publishedDate == null) {
+        return -1;
+      } else if (a.publishedDate == null) {
+        return 1;
+      } else {
+        return b.publishedDate.diff(a.publishedDate);
+      }
+    });
 
   function createUrl(path: string, searchParams: URLSearchParams) {
     return [path, searchParams.toString()].filter(Boolean).join("?");
@@ -46,7 +62,7 @@ async function Home() {
               {page.title}
             </Link>
             <span className="text-base">
-              {page.publishedDate.format("MMM DD, YYYY")}
+              {page.publishedDate?.format("MMM DD, YYYY") || "unpublished"}
             </span>
           </div>
         );

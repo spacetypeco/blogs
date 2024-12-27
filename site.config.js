@@ -42,4 +42,6 @@ export default siteConfig({
   revalidate: process.env.NEXT_PUBLIC_SITE_REVALIDATE
     ? parseInt(process.env.NEXT_PUBLIC_SITE_REVALIDATE)
     : 60,
+
+  showUnpublished: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
 });

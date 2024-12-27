@@ -10,6 +10,7 @@ export interface SiteConfig {
   author: string;
   language?: string;
   revalidate: number;
+  showUnpublished: boolean;
 
   colorSiteTitle?: string;
   colorAccent?: string;
