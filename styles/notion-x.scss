@@ -81,6 +81,15 @@ blockquote {
   margin-top: 1.5rem;
 }
 
+.notion-external-block-desc {
+  padding-top: 0;
+}
+
+.notion-external-block {
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+
 // Make callouts a little bit prettier.
 .notion-callout {
   border-radius: 5px;
