@@ -21,7 +21,7 @@ Individual sites are configured under [site.config.js](/site.config.js).
 
 ## Deployment
 
-This repo automatically deploys to all blogs via Github Actions when changes are pushed to main.
+This repo automatically deploys to all blogs via Github Actions when changes are pushed to main. View deployments under [the Actions tab](https://github.com/spacetypeco/blogs/actions).
 
 ## High-Level Architecture
 
