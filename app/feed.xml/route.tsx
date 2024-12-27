@@ -5,6 +5,7 @@ import { getBlockTitle, getPageProperty } from "notion-utils";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
 import { getCanonicalPageUrl } from "../../lib/notion_client/mapPageUrl";
 import siteConfig from "../../site.config";
+import { getFirstBlock, isBlogPost } from "../../util/notion";
 
 export async function GET(req) {
   const siteMap = await getSiteMap();
@@ -39,16 +40,13 @@ export async function GET(req) {
       continue;
     }
 
-    const keys = Object.keys(recordMap?.block || {});
-    const block = recordMap?.block?.[keys[0]]?.value;
+    const block = getFirstBlock(recordMap);
     if (!block) {
       console.log(`Skipping ${pagePath} - Block DNE`);
       continue;
     }
 
-    const isBlogPost = block.type === "page" && block.properties["JgHm"];
-
-    if (!isBlogPost) {
+    if (!isBlogPost(block)) {
       console.log(`Skipping ${pagePath} - Not a blog post`);
       continue;
     }
