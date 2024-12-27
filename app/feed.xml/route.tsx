@@ -95,7 +95,6 @@ export async function GET(req) {
 
   return new Response(feedText, {
     headers: {
-      "Cache-Control": `public, max-age=${ttlSeconds}, stale-while-revalidate=${ttlSeconds}`,
       "Content-Type": "text/xml; charset=utf-8",
     },
   });

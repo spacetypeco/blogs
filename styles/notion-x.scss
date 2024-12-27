@@ -45,6 +45,10 @@ blockquote {
   color: var(--color-body);
 }
 
+.notion-external-title {
+  color: var(--color-accent);
+}
+
 // Make the page titles a little smaller
 .notion-title {
   font-size: 2.5rem;
