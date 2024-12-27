@@ -19,7 +19,7 @@ export default function Navigation() {
   });
 
   return (
-    <Link href="/" className="color-accent-hover">
+    <Link href="/" className="color-site-title color-accent-hover">
       <nav className="container w-full flex pt-12 t5">{els}</nav>
     </Link>
   );

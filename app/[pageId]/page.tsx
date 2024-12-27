@@ -27,7 +27,7 @@ async function Home({ params }) {
     return (
       <section className="container w-full flex flex-col">
         <div className="text-sm mt-4 flex items-start gap-2">
-          <span>( ﾉ･o･ )ﾉ</span>
+          <span>{siteConfig.dateIcon}</span>
           <p
             style={{
               transformOrigin: "center",

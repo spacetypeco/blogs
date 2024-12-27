@@ -5,11 +5,13 @@ export interface SiteConfig {
   name: string;
   description: string;
   icon: string;
+  dateIcon: string;
   domain: string;
   author: string;
   language?: string;
   revalidate: number;
 
+  colorSiteTitle?: string;
   colorAccent?: string;
   colorBackground?: string;
   colorPrimary?: string;

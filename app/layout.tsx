@@ -97,6 +97,7 @@ export default function Layout({ children }) {
       <body
         style={{
           ["--color-accent" as string]: siteConfig.colorAccent,
+          ["--color-site-title" as string]: siteConfig.colorSiteTitle,
           ["--color-background" as string]: siteConfig.colorBackground,
           ["--color-primary" as string]: siteConfig.colorPrimary,
           ["--color-body" as string]: siteConfig.colorBody,

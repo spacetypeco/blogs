@@ -3,6 +3,7 @@ import { siteConfig } from "./lib/siteConfig";
 const Config = {
   "small caps": {
     icon: "🧢",
+    dateIcon: "(~‾⌣‾)~",
     description: "It's a blog!",
     domain: "https://smallcaps.spacetypeco.com",
     author: "lynne",
@@ -12,12 +13,14 @@ const Config = {
     fontHeadingsLarge: "ST Felicette Medium",
     fontHeadingsSmall: "ST Felicette Regular",
     fontBody: "ST Felicette Regular",
-    colorPrimary: "#ff6d6d",
-    colorBody: "#ff6d6d",
-    colorCaption: "#ff6d6d",
+    colorSiteTitle: "#ff6d6d",
+    // colorPrimary: "#ff6d6d",
+    // colorBody: "#ff6d6d",
+    // colorCaption: "#ff6d6d",
   },
   "ok, ok, ok": {
     icon: "👌",
+    dateIcon: "( ﾉ･o･ )ﾉ",
     description: "ok! ok! ok!",
     domain: "https://ok.spacetypeco.com",
     author: "kevin",
