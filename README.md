@@ -15,10 +15,14 @@ Once you've got that ready, you can spin up local dev:
 npm install && npm run dev
 ```
 
-## High-Level Architecture
+## Configuration
 
-Foundations: Next.js 14, Typescript, Tailwind CSS, PostCSS (SASS support), SVGR
+Individual sites are configured under [site.config.js](/site.config.js).
 
 ## Deployment
 
-This repo automatically deploys to all blogs on push to main using Github Actions.
+This repo automatically deploys to all blogs via Github Actions when changes are pushed to main.
+
+## High-Level Architecture
+
+Foundations: Next.js 14, Typescript, Tailwind CSS, PostCSS (SASS support), SVGR
