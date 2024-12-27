@@ -1,16 +1,50 @@
+// Make the blog width a little bit wider.
+:root {
+  --notion-max-width: 800px;
+}
+
+// Reduce the notion blog padding on small screens.
+.notion-page {
+  padding-left: calc(min(0.25rem, 8vw));
+  padding-right: calc(min(0.25rem, 8vw));
+}
+
+// Hide the navigational breadcrumbs, we don't need 'em.
 .notion-header {
   display: none;
 }
 
+// Make the notion rendering background transparent (i.e. leverage the site background instead)
+.notion-app {
+  background: none;
+}
+
+// Set the colors
 .notion-title,
 .notion-h {
   color: var(--color-primary);
 }
 
+.notion-link {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.notion-text {
+  color: var(--color-body);
+}
+
+.notion-callout-text > .notion-text,
+blockquote {
+  color: var(--color-body);
+}
+
+// Make the page titles a little smaller
 .notion-title {
   font-size: 2.5rem;
 }
 
+// Adjust spacing in blog posts
 .notion-h + .notion-text {
   margin-top: 0.4rem;
 }
@@ -27,15 +61,7 @@
   margin-top: 1.5rem;
 }
 
-:root {
-  --notion-max-width: 800px;
-}
-
-.notion-link {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
+// Make callouts a little bit prettier.
 .notion-callout {
   border-radius: 5px;
   border: none;
@@ -43,25 +69,9 @@
   padding-top: 20px;
 }
 
-.notion-app {
-  background: none;
-}
-
-.notion-text {
-  color: var(--color-body);
-}
-
-.notion-callout-text > .notion-text,
-blockquote {
-  color: var(--color-body);
-}
-
+// Make captions a little bit prettier.
 .notion-asset-caption {
   color: var(--color-caption);
   opacity: 0.7;
-}
-
-.notion-page {
-  padding-left: calc(min(0.25rem, 8vw));
-  padding-right: calc(min(0.25rem, 8vw));
+  text-align: center;
 }
