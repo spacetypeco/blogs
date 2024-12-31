@@ -57,9 +57,15 @@ export async function generateMetadata(
     title,
     description,
     openGraph: {
+      title,
       images: socialImageUrl ? [socialImageUrl] : previousImages,
       description,
       url,
+    },
+    twitter: {
+      title,
+      description,
+      images: socialImageUrl ? [socialImageUrl] : previousImages,
     },
   };
 }

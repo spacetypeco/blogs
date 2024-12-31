@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     images: [`${siteConfig.domain}/api/og`],
     url: siteConfig.domain,
   },
+  twitter: {
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`${siteConfig.domain}/api/og`],
+  },
 };
 
 export default function Layout({ children }) {
@@ -58,14 +63,8 @@ export default function Layout({ children }) {
         {GoogleAnalytics}
         <meta charSet="utf-8" />
         <meta property="og:type" content="website" />
-        <meta property="twitter:title" content={siteConfig.name} />
-        <meta property="twitter:description" content={siteConfig.description} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:creator" content="@spacetypeco" />
-        <meta
-          property="twitter:image"
-          content={`${siteConfig.domain}/api/og`}
-        />
         <meta property="twitter:image:alt" content="Blog logo" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
