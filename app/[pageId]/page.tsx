@@ -1,17 +1,68 @@
 import dayjs from "dayjs";
-import { getDateValue, parsePageId } from "notion-utils";
+import type { Metadata, ResolvingMetadata } from "next";
+import { getBlockTitle, getDateValue } from "notion-utils";
 
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import NotionPage from "../../components/NotionPage";
+import { getPageDescriptionFromRecordMap } from "../../lib/notion_client/getPageDescription";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
+import { getSocialImageUrlFromRecordMap } from "../../lib/notion_client/getSocialImageUrl";
 import NotionClient from "../../lib/notion_client/NotionClient";
 import siteConfig from "../../site.config";
-import { getFirstBlock } from "../../util/notion";
+import { getFirstBlock, isBlogPost } from "../../util/notion";
 
 export const dynamic = "auto";
 export const revalidate = siteConfig.revalidate;
+
+type Props = {
+  params: Promise<{ pageId: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata | null> {
+  // read route params
+  const pageId = (await params).pageId;
+
+  // fetch data
+  const siteMap = await getSiteMap();
+  const notionId = siteMap?.canonicalPageMap[pageId];
+
+  if (!notionId) {
+    return null;
+  }
+
+  const recordMap = await NotionClient.getPage(notionId);
+  const socialImageUrl = await getSocialImageUrlFromRecordMap(recordMap);
+  console.log("SOCIAL IMAGE URL: ", socialImageUrl);
+
+  const block = getFirstBlock(recordMap);
+
+  if (!block || !isBlogPost(block)) {
+    return null;
+  }
+
+  const title = getBlockTitle(block, recordMap) || siteConfig.name;
+  const previousImages = (await parent).openGraph?.images || [];
+  const description = getPageDescriptionFromRecordMap(recordMap);
+  const url = `${siteConfig.domain}/${pageId}`;
+
+  console.log("DESCRIPTION");
+  console.log(description);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      images: socialImageUrl ? [socialImageUrl] : previousImages,
+      description,
+      url,
+    },
+  };
+}
 
 async function Home({ params }) {
   const siteMap = await getSiteMap();

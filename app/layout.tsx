@@ -16,8 +16,21 @@ import "../styles/layout.scss";
 import "../styles/logo.scss";
 import "../styles/notion-x.scss";
 
+import { Metadata } from "next";
+
 import Navigation from "../components/Navigation";
 import siteConfig from "../site.config";
+
+export const metadata: Metadata = {
+  title: siteConfig.name,
+  description: siteConfig.description,
+  openGraph: {
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`${siteConfig.domain}/api/og`],
+    url: siteConfig.domain,
+  },
+};
 
 export default function Layout({ children }) {
   // Update this with your custom Google Analytics ID
@@ -44,13 +57,7 @@ export default function Layout({ children }) {
       <head>
         {GoogleAnalytics}
         <meta charSet="utf-8" />
-        <title>{siteConfig.name}</title>
-        <meta name="description" content={siteConfig.description} />
-        <meta property="og:title" content={siteConfig.name} />
-        <meta property="og:description" content={siteConfig.description} />
-        <meta property="og:url" content={siteConfig.domain} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={`${siteConfig.domain}/api/og`} />
         <meta property="twitter:title" content={siteConfig.name} />
         <meta property="twitter:description" content={siteConfig.description} />
         <meta property="twitter:card" content="summary_large_image" />

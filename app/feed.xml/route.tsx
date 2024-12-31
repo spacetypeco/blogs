@@ -2,7 +2,9 @@ import { Feed } from "feed";
 import { type ExtendedRecordMap } from "notion-types";
 import { getBlockTitle, getPageProperty } from "notion-utils";
 
+import { getPageDescription } from "../../lib/notion_client/getPageDescription";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
+import { getSocialImageUrl } from "../../lib/notion_client/getSocialImageUrl";
 import { getCanonicalPageUrl } from "../../lib/notion_client/mapPageUrl";
 import siteConfig from "../../site.config";
 import { getFirstBlock, isBlogPost } from "../../util/notion";
@@ -52,9 +54,7 @@ export async function GET(req) {
     }
 
     const title = getBlockTitle(block, recordMap) || siteConfig.name;
-    const description =
-      getPageProperty<string>("Description", block, recordMap) ||
-      siteConfig.description;
+    const description = await getPageDescription(pageId);
     const link = getCanonicalPageUrl(recordMap)(pageId);
     const lastUpdatedTime = getPageProperty<number>(
       "Last Updated",
@@ -72,7 +72,7 @@ export async function GET(req) {
         ? new Date(publishedTime)
         : undefined;
 
-    // const socialImageUrl = getSocialImageUrl(pageId);
+    // const socialImageUrl = await getSocialImageUrl(pageId);
 
     feed.addItem({
       title,
@@ -80,7 +80,9 @@ export async function GET(req) {
       link,
       date,
       description,
+      content: description,
       published: new Date(publishedTime),
+      // image: new URL(socialImageUrl).toString(),
       // content
       //   enclosure: socialImageUrl
       //     ? {
