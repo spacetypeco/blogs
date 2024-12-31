@@ -36,7 +36,7 @@ export async function generateMetadata(
   }
 
   const recordMap = await NotionClient.getPage(notionId);
-  const socialImageUrl = await getSocialImageUrlFromRecordMap(recordMap);
+  const socialImageUrl = `${siteConfig.domain}/api/og/blog?id=${notionId}`;
   console.log("SOCIAL IMAGE URL: ", socialImageUrl);
 
   const block = getFirstBlock(recordMap);
