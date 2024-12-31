@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Feed } from "feed";
 import { type ExtendedRecordMap } from "notion-types";
 import { getBlockTitle, getPageProperty } from "notion-utils";
@@ -33,6 +34,7 @@ export async function GET(req) {
 
   console.log("Generating feed");
 
+  const items = [];
   for (const pagePath of Object.keys(siteMap.canonicalPageMap)) {
     console.log("Checking " + pagePath);
     const pageId = siteMap.canonicalPageMap[pagePath];
@@ -74,7 +76,7 @@ export async function GET(req) {
 
     // const socialImageUrl = await getSocialImageUrl(pageId);
 
-    feed.addItem({
+    items.push({
       title,
       author: [author],
       link,
@@ -92,6 +94,12 @@ export async function GET(req) {
       //     : undefined,
     });
   }
+
+  // Sort by most recent first
+  const sortedItems = items.toSorted((a, b) =>
+    dayjs(b.publishedTime).diff(a.publishedTime),
+  );
+  sortedItems.forEach((item) => feed.addItem(item));
 
   const feedText = feedType === "rss" ? feed.rss2() : feed.atom1();
 
