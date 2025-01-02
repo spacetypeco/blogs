@@ -97,7 +97,7 @@ export async function GET(req) {
 
   // Sort by most recent first
   const sortedItems = items.toSorted((a, b) =>
-    dayjs(a.publishedTime).diff(b.publishedTime),
+    dayjs(b.published).diff(a.published),
   );
   sortedItems.forEach((item) => feed.addItem(item));
 
