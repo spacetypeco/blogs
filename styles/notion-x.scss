@@ -3,6 +3,12 @@
   --notion-max-width: 800px;
 }
 
+@media (max-width: 1536px) {
+  :root {
+    --notion-max-width: 700px;
+  }
+}
+
 // Reduce the notion blog padding on small screens.
 .notion-page {
   padding-left: calc(min(0.25rem, 8vw));
