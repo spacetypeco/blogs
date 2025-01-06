@@ -104,6 +104,14 @@ blockquote {
   padding-bottom: 8px;
 }
 
+.notion-callout-text > .notion-text:first-of-type {
+  margin-top: 0.6em;
+}
+
+.notion-callout-text > .notion-list + .notion-text:first-of-type {
+  margin-top: 0;
+}
+
 // Make callouts a little bit prettier.
 .notion-callout {
   border-radius: 5px;
@@ -117,4 +125,9 @@ blockquote {
   color: var(--color-caption);
   opacity: 0.7;
   text-align: center;
+}
+
+// Make hr visible.
+.notion-hr {
+  border-top: 1px solid #e5e7eb;
 }

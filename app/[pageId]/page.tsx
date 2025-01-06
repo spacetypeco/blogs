@@ -80,20 +80,20 @@ async function Home({ params }) {
 
     return (
       <section className="container w-full flex flex-col">
-        {publishedDate ||
-          (process.env.NEXT_PUBLIC_VERCEL_ENV != "production" && (
-            <div className="text-sm mt-4 flex items-start gap-2">
-              <span>{siteConfig.dateIcon}</span>
-              <p
-                style={{
-                  transformOrigin: "center",
-                  transform: "rotate(3deg) translateY(-2px)",
-                }}
-              >
-                {publishedDate?.format("MMM DD, YYYY") || "unpublished"}
-              </p>
-            </div>
-          ))}
+        {(publishedDate ||
+          process.env.NEXT_PUBLIC_VERCEL_ENV != "production") && (
+          <div className="text-sm mt-4 flex items-start gap-2">
+            <span>{siteConfig.dateIcon}</span>
+            <p
+              style={{
+                transformOrigin: "center",
+                transform: "rotate(3deg) translateY(-2px)",
+              }}
+            >
+              {publishedDate?.format("MMM DD, YYYY") || "unpublished"}
+            </p>
+          </div>
+        )}
         <NotionPage recordMap={recordMap} />
       </section>
     );
