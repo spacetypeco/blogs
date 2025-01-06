@@ -75,7 +75,8 @@ blockquote {
   margin-top: 0.4rem;
 }
 
-.notion-h + .notion-asset-wrapper {
+.notion-h + .notion-asset-wrapper,
+.notion-h + .notion-row {
   margin-top: 1.3rem;
 }
 
@@ -87,11 +88,13 @@ blockquote {
   margin-top: 0.4rem;
 }
 
-.notion-text + .notion-asset-wrapper {
+.notion-text + .notion-asset-wrapper,
+.notion-text + .notion-row {
   margin-top: 1.3rem;
 }
 
-.notion-asset-wrapper + .notion-text {
+.notion-asset-wrapper + .notion-text,
+.notion-row + .notion-text {
   margin-top: 1.3rem;
 }
 
