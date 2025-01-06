@@ -134,3 +134,10 @@ blockquote {
 .notion-hr {
   border-top: 1px solid #e5e7eb;
 }
+
+// Fix video formatting.
+.notion-asset-wrapper-video > div {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
