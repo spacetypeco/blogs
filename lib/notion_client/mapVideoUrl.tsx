@@ -7,7 +7,7 @@ export default function mapVideoUrl(block: Block) {
 
   const url = block.properties.source[0][0];
 
-  if (!url.includes("prod-files.secure") || url.includes("signed")) {
+  if (!url.includes("prod-files-secure") || url.includes("signed")) {
     return;
   }
 
