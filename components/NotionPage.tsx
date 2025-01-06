@@ -23,15 +23,6 @@ export default function NotionPage({ recordMap }) {
     mapVideoUrl(block);
   }
 
-  //   console.log(block.type);
-  //   console.log(block);
-
-  //   if (block.type === "video") {
-  //     recordMap.signed_urls[block.id] = block.properties.source[0][0];
-  //     block.format.display_source = block.properties.source[0][0];
-  //   }
-  // }
-
   return (
     <NotionRenderer
       recordMap={recordMap}
