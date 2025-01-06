@@ -15,7 +15,6 @@ export default function NotionPage({ recordMap }) {
     return mapPageUrl(recordMap, searchParams);
   }, [recordMap]);
 
-  console.log(recordMap);
   const keys = Object.keys(recordMap.block || {});
 
   for (const key of keys) {
