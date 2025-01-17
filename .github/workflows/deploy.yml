@@ -19,6 +19,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22.12.0
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
       - name: Link project
         run: vercel link --project ${{ matrix.vercel_project }} --yes --token ${{ secrets.VERCEL_ACCOUNT_TOKEN }}
