@@ -89,12 +89,16 @@ blockquote {
 }
 
 .notion-text + .notion-asset-wrapper,
-.notion-text + .notion-row {
+.notion-text + .notion-row,
+.notion-text + .notion-quote,
+.notion-quote + .notion-row {
   margin-top: 1.3rem;
 }
 
 .notion-asset-wrapper + .notion-text,
-.notion-row + .notion-text {
+.notion-row + .notion-text,
+.notion-row + .notion-quote,
+.notion-quote + .notion-text {
   margin-top: 1.3rem;
 }
 
