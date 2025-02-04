@@ -25,6 +25,12 @@ async function Home() {
         getPageProperty<boolean | null>("Published Date", b.value, dbRecords),
     )
     .map((b) => {
+      const publishedTime = getPageProperty<number>(
+        "Published Date",
+        b.value,
+        dbRecords,
+      );
+
       return {
         id: b.value.id,
         title: b.value.properties.title[0][0],
@@ -32,8 +38,8 @@ async function Home() {
           `/${getCanonicalPageId(b.value.id, dbRecords, { uuid: false })}`,
           new URLSearchParams(),
         ),
-        publishedDate: b.value.properties.JgHm
-          ? dayjs(getDateValue(b.value.properties.JgHm).start_date)
+        publishedDate: publishedTime
+          ? dayjs(publishedTime)
           : null,
       };
     })

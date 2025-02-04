@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import type { Metadata, ResolvingMetadata } from "next";
-import { getBlockTitle, getDateValue } from "notion-utils";
+import { getBlockTitle, getPageProperty } from "notion-utils";
 
 import { notFound } from "next/navigation";
 
 import NotionPage from "../../components/NotionPage";
 import { getPageDescriptionFromRecordMap } from "../../lib/notion_client/getPageDescription";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
-import { getSocialImageUrlFromRecordMap } from "../../lib/notion_client/getSocialImageUrl";
 import NotionClient from "../../lib/notion_client/NotionClient";
 import siteConfig from "../../site.config";
 import { getFirstBlock, isBlogPost } from "../../util/notion";
@@ -41,7 +40,7 @@ export async function generateMetadata(
 
   const block = getFirstBlock(recordMap);
 
-  if (!block || !isBlogPost(block)) {
+  if (!block || !isBlogPost(block, recordMap)) {
     return null;
   }
 
@@ -74,9 +73,12 @@ async function Home({ params }) {
   try {
     const recordMap = await NotionClient.getPage(notionId);
     const block = getFirstBlock(recordMap);
-    const publishedDate = block.properties["JgHm"]
-      ? dayjs(getDateValue(block.properties["JgHm"]).start_date)
-      : null;
+    const publishedTime = getPageProperty<number>(
+      "Published Date",
+      block,
+      recordMap,
+    );
+    const publishedDate = publishedTime ? dayjs(publishedTime) : null;
 
     return (
       <section className="container w-full flex flex-col">

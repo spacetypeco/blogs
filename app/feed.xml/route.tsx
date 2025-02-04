@@ -50,7 +50,7 @@ export async function GET(req) {
       continue;
     }
 
-    if (!isBlogPost(block)) {
+    if (!isBlogPost(block, recordMap)) {
       console.log(`Skipping ${pagePath} - Not a blog post`);
       continue;
     }
