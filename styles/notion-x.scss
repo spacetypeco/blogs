@@ -145,3 +145,8 @@ blockquote {
   width: 100% !important;
   height: 100% !important;
 }
+
+// Fix embed formatting
+.notion-asset-wrapper-embed {
+  max-width: 100%;
+}
