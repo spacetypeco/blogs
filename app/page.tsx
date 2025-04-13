@@ -1,11 +1,10 @@
-import dayjs from "dayjs";
 import { getDateValue, getPageProperty, parsePageId } from "notion-utils";
 
 import Link from "next/link";
-
+import NotionClient from "../lib/notion_client/NotionClient";
+import dayjs from "dayjs";
 import { getCanonicalPageId } from "../lib/notion_client/getCanonicalPageId";
 import { getSiteConfig } from "../lib/notion_client/getSiteMap";
-import NotionClient from "../lib/notion_client/NotionClient";
 import siteConfig from "../site.config";
 
 export const revalidate = siteConfig.revalidate;
@@ -38,9 +37,7 @@ async function Home() {
           `/${getCanonicalPageId(b.value.id, dbRecords, { uuid: false })}`,
           new URLSearchParams(),
         ),
-        publishedDate: publishedTime
-          ? dayjs(publishedTime)
-          : null,
+        publishedDate: publishedTime ? dayjs(publishedTime) : null,
       };
     })
     .toSorted((a, b) => {
