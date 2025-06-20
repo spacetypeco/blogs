@@ -11,7 +11,7 @@ import NotionClient from "../../lib/notion_client/NotionClient";
 import siteConfig from "../../site.config";
 import { getFirstBlock, isBlogPost } from "../../util/notion";
 
-export const dynamic = "auto";
+export const dynamic = "force-static";
 export const revalidate = siteConfig.revalidate;
 
 type Props = {
