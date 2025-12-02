@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import dayjs from "dayjs";
 
 import Link from "next/link";
-import dayjs from "dayjs";
+import { useMemo, useState } from "react";
 
 type Page = {
   id: string;
@@ -34,9 +34,6 @@ export default function PageList({ pages }: PageListProps) {
 
   // Filter pages based on selected type
   const filteredPages = useMemo(() => {
-    if (selectedType === null) {
-      return pages;
-    }
     return pages.filter((p) => p.type === selectedType);
   }, [pages, selectedType]);
 
