@@ -1,8 +1,7 @@
-import { getDateValue, getPageProperty, parsePageId } from "notion-utils";
+import { getPageProperty, parsePageId } from "notion-utils";
 
-import Link from "next/link";
 import NotionClient from "../lib/notion_client/NotionClient";
-import dayjs from "dayjs";
+import PageList from "../components/PageList";
 import { getCanonicalPageId } from "../lib/notion_client/getCanonicalPageId";
 import { getSiteConfig } from "../lib/notion_client/getSiteMap";
 import siteConfig from "../site.config";
@@ -29,6 +28,7 @@ async function Home() {
         b.value,
         dbRecords,
       );
+      const type = getPageProperty<string | null>("Type", b.value, dbRecords);
 
       return {
         id: b.value.id,
@@ -37,7 +37,8 @@ async function Home() {
           `/${getCanonicalPageId(b.value.id, dbRecords, { uuid: false })}`,
           new URLSearchParams(),
         ),
-        publishedDate: publishedTime ? dayjs(publishedTime) : null,
+        publishedDate: publishedTime || null,
+        type: type || null,
       };
     })
     .toSorted((a, b) => {
@@ -48,7 +49,7 @@ async function Home() {
       } else if (a.publishedDate == null) {
         return 1;
       } else {
-        return b.publishedDate.diff(a.publishedDate);
+        return b.publishedDate - a.publishedDate;
       }
     });
 
@@ -56,22 +57,7 @@ async function Home() {
     return [path, searchParams.toString()].filter(Boolean).join("?");
   }
 
-  return (
-    <section className="container w-full flex flex-col pt-12 gap-6 items-start">
-      {pages.map((page) => {
-        return (
-          <div className="flex flex-col gap-1">
-            <Link href={page.path} className="color-accent-hover t6">
-              {page.title}
-            </Link>
-            <span className="text-base">
-              {page.publishedDate?.format("MMM DD, YYYY") || "unpublished"}
-            </span>
-          </div>
-        );
-      })}
-    </section>
-  );
+  return <PageList pages={pages} />;
 }
 
 export default Home;
