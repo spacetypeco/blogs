@@ -3,7 +3,7 @@ import { Feed } from "feed";
 import { type ExtendedRecordMap } from "notion-types";
 import { getBlockTitle, getPageProperty } from "notion-utils";
 
-import { getPageDescription } from "../../lib/notion_client/getPageDescription";
+import { getPageDescriptionFromRecordMap } from "../../lib/notion_client/getPageDescription";
 import { getSiteMap } from "../../lib/notion_client/getSiteMap";
 import { getSocialImageUrl } from "../../lib/notion_client/getSocialImageUrl";
 import { getCanonicalPageUrl } from "../../lib/notion_client/mapPageUrl";
@@ -32,32 +32,24 @@ export async function GET(req) {
     copyright: "",
   });
 
-  console.log("Generating feed");
-
-  const items = [];
+  // First pass: collect minimal data (no description/title/link) so we can sort and take top 5
+  const candidates: Array<{
+    pageId: string;
+    recordMap: ExtendedRecordMap;
+    block: ReturnType<typeof getFirstBlock>;
+    publishedTime: number;
+    lastUpdatedTime: number | undefined;
+  }> = [];
   for (const pagePath of Object.keys(siteMap.canonicalPageMap)) {
-    console.log("Checking " + pagePath);
     const pageId = siteMap.canonicalPageMap[pagePath];
     const recordMap = siteMap.pageMap[pageId] as ExtendedRecordMap;
-    if (!recordMap) {
-      console.log(`Skipping ${pagePath} - RecordMap DNE`);
-      continue;
-    }
+    if (!recordMap) continue;
 
     const block = getFirstBlock(recordMap);
-    if (!block) {
-      console.log(`Skipping ${pagePath} - Block DNE`);
-      continue;
-    }
+    if (!block) continue;
 
-    if (!isBlogPost(block, recordMap)) {
-      console.log(`Skipping ${pagePath} - Not a blog post`);
-      continue;
-    }
+    if (!isBlogPost(block, recordMap)) continue;
 
-    const title = getBlockTitle(block, recordMap) || siteConfig.name;
-    const description = await getPageDescription(pageId);
-    const link = getCanonicalPageUrl(recordMap)(pageId);
     const lastUpdatedTime = getPageProperty<number>(
       "Last Updated",
       block,
@@ -68,38 +60,41 @@ export async function GET(req) {
       block,
       recordMap,
     );
+    candidates.push({
+      pageId,
+      recordMap,
+      block,
+      publishedTime: publishedTime ?? 0,
+      lastUpdatedTime,
+    });
+  }
+
+  // Sort by most recent first and take only the 5 we need
+  const top5 = candidates
+    .toSorted((a, b) => b.publishedTime - a.publishedTime)
+    .slice(0, 5);
+
+  // Second pass: build full feed items only for the top 5
+  for (const { pageId, recordMap, block, publishedTime, lastUpdatedTime } of top5) {
+    const title = getBlockTitle(block, recordMap) || siteConfig.name;
+    const description = getPageDescriptionFromRecordMap(recordMap);
+    const link = getCanonicalPageUrl(recordMap)(pageId);
     const date = lastUpdatedTime
       ? new Date(lastUpdatedTime)
       : publishedTime
         ? new Date(publishedTime)
         : undefined;
 
-    // const socialImageUrl = await getSocialImageUrl(pageId);
-
-    items.push({
-      title,
+    feed.addItem({
+      title: (title ?? siteConfig.name) as string,
       author: [author],
-      link,
-      date,
-      description,
-      content: description,
+      link: link as string,
+      date: date ?? new Date(publishedTime),
+      description: (description ?? "") as string,
+      content: (description ?? "") as string,
       published: new Date(publishedTime),
-      // image: new URL(socialImageUrl).toString(),
-      // content
-      //   enclosure: socialImageUrl
-      //     ? {
-      //         url: socialImageUrl,
-      //         type: "image/jpeg",
-      //       }
-      //     : undefined,
     });
   }
-
-  // Sort by most recent first
-  const sortedItems = items.toSorted((a, b) =>
-    dayjs(b.published).diff(a.published),
-  );
-  sortedItems.forEach((item) => feed.addItem(item));
 
   const feedText = feedType === "rss" ? feed.rss2() : feed.atom1();
 
