@@ -66,9 +66,14 @@ export async function generateMetadata(
   };
 }
 
-async function Home({ params }) {
+async function Home({ params }: Props) {
+  const { pageId } = await params;
   const siteMap = await getSiteMap();
-  const notionId = siteMap?.canonicalPageMap[params.pageId];
+  const notionId = siteMap?.canonicalPageMap[pageId];
+
+  if (!notionId) {
+    notFound();
+  }
 
   try {
     const recordMap = await NotionClient.getPage(notionId);

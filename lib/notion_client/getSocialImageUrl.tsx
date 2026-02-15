@@ -1,7 +1,7 @@
-import { defaultMapImageUrl } from "notion-utils";
+import { Block, ExtendedRecordMap } from "./types";
 
 import NotionClient from "./NotionClient";
-import { ExtendedRecordMap } from "./types";
+import { defaultMapImageUrl } from "notion-utils";
 
 export async function getSocialImageUrlFromRecordMap(
   recordMap: ExtendedRecordMap,
@@ -9,7 +9,7 @@ export async function getSocialImageUrlFromRecordMap(
   const keys = Object.keys(recordMap?.block || {});
 
   for (const key of keys) {
-    const block = recordMap?.block?.[key].value;
+    const block = recordMap?.block?.[key].value as Block;
     if (block.type === "image") {
       const source = block.properties.source[0][0];
       console.log(defaultMapImageUrl(source, block));

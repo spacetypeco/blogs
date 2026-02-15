@@ -32,8 +32,9 @@ export default function PageList({ pages }: PageListProps) {
   // State for selected type filter (null means "all")
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
-  // Filter pages based on selected type
+  // Filter pages based on selected type (null = show all)
   const filteredPages = useMemo(() => {
+    if (selectedType === null) return pages;
     return pages.filter((p) => p.type === selectedType);
   }, [pages, selectedType]);
 

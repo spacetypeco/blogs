@@ -1,10 +1,11 @@
-import { getAllPagesInSpace, getPageProperty, parsePageId } from "notion-utils";
-import pMemoize from "p-memoize";
-
-import siteConfig from "../../site.config";
-import { getCanonicalPageId } from "./getCanonicalPageId";
-import NotionClient from "./NotionClient";
 import type * as types from "./types";
+
+import { getAllPagesInSpace, getPageProperty, parsePageId } from "notion-utils";
+
+import NotionClient from "./NotionClient";
+import { getCanonicalPageId } from "./getCanonicalPageId";
+import pMemoize from "p-memoize";
+import siteConfig from "../../site.config";
 
 export function getSiteConfig<T>(key: string, defaultValue?: T): T {
   const value = siteConfig[key];
@@ -65,7 +66,7 @@ async function getAllPagesImpl(
         throw new Error(`Error loading page "${pageId}"`);
       }
 
-      const block = recordMap.block[pageId]?.value;
+      const block = recordMap.block[pageId]?.value as types.Block;
 
       if (
         !(

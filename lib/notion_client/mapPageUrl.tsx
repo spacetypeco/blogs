@@ -7,32 +7,39 @@ import { getSiteConfig } from "./getSiteMap";
 export const mapPageUrl =
   (recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
   (pageId = "") => {
-    const pageUuid = parsePageId(pageId, { uuid: true });
-    const rootNotionPageId: string = parsePageId(
-      getSiteConfig("rootNotionPageId"),
-      { uuid: false },
-    );
+    try {
+      const pageUuid = parsePageId(pageId ?? "", { uuid: true });
+      if (!pageUuid) return createUrl("/", searchParams);
 
-    if (uuidToId(pageUuid) === rootNotionPageId) {
-      return createUrl("/", searchParams);
-    } else {
+      const rootNotionPageId: string = parsePageId(
+        getSiteConfig("rootNotionPageId"),
+        { uuid: false },
+      );
+
+      if (uuidToId(pageUuid) === rootNotionPageId) {
+        return createUrl("/", searchParams);
+      }
       return createUrl(
         `/${getCanonicalPageId(pageUuid, recordMap, { uuid: false })}`,
         searchParams,
       );
+    } catch {
+      return createUrl("/", searchParams);
     }
   };
 
 export const getCanonicalPageUrl =
   (recordMap: ExtendedRecordMap) =>
   (pageId = "") => {
-    const pageUuid = parsePageId(pageId, { uuid: true });
+    const pageUuid = parsePageId(pageId ?? "", { uuid: true });
+    if (!pageUuid) return getSiteConfig("domain");
+
     const rootNotionPageId: string = parsePageId(
       getSiteConfig("rootNotionPageId"),
       { uuid: false },
     );
     const domain = getSiteConfig("domain");
-    if (uuidToId(pageId) === rootNotionPageId) {
+    if (uuidToId(pageUuid) === rootNotionPageId) {
       return `${domain}`;
     } else {
       return `${domain}/${getCanonicalPageId(pageUuid, recordMap, {

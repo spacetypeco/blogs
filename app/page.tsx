@@ -1,5 +1,6 @@
 import { getPageProperty, parsePageId } from "notion-utils";
 
+import type { Block } from "../lib/notion_client/types";
 import NotionClient from "../lib/notion_client/NotionClient";
 import PageList from "../components/PageList";
 import { getCanonicalPageId } from "../lib/notion_client/getCanonicalPageId";
@@ -15,26 +16,38 @@ async function Home() {
   );
 
   const dbRecords = await NotionClient.getPage(rootNotionPageId);
-  const pages = Object.values(dbRecords.block)
-    .filter((b) => b.value.type == "page")
+
+  /** Unwrap NotionMapBox: can be { value: Block } or { value: { value: Block } } */
+  const getBlock = (entry: unknown): Block | undefined => {
+    const v = (entry as { value?: unknown })?.value;
+    if (v && typeof v === "object" && v !== null && "value" in v) {
+      return (v as { value: Block }).value;
+    }
+    return v as Block | undefined;
+  };
+
+  const blockEntries = Object.values(dbRecords.block);
+  const pages = blockEntries
+    .map((b) => getBlock(b))
+    .filter((block): block is Block => block != null && block.type === "page")
     .filter(
-      (b) =>
+      (block) =>
         siteConfig.showUnpublished ||
-        getPageProperty<boolean | null>("Published Date", b.value, dbRecords),
+        getPageProperty<boolean | null>("Published Date", block, dbRecords),
     )
-    .map((b) => {
+    .map((block) => {
       const publishedTime = getPageProperty<number>(
         "Published Date",
-        b.value,
+        block,
         dbRecords,
       );
-      const type = getPageProperty<string | null>("Type", b.value, dbRecords);
+      const type = getPageProperty<string | null>("Type", block, dbRecords);
 
       return {
-        id: b.value.id,
-        title: b.value.properties.title[0][0],
+        id: block.id,
+        title: block.properties?.title?.[0]?.[0] ?? "",
         path: createUrl(
-          `/${getCanonicalPageId(b.value.id, dbRecords, { uuid: false })}`,
+          `/${getCanonicalPageId(block.id, dbRecords, { uuid: false })}`,
           new URLSearchParams(),
         ),
         publishedDate: publishedTime || null,
